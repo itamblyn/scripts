@@ -1,0 +1,32 @@
+
+#-----------------------------------------------------------------------------------------#
+# vasp2xyz: version 1.1 (c) April 2001 by MD 						  #
+#											  #
+# Program to convert POSCAR and CONTCAR files into xyz format to view it with RasMol 	  #
+#											  #
+# Syntax: vasp2xyz [-h] [-c] [-n] [-nos] [dl=smearedbox] [i=inputfile] [o=xyzfile]	  #		
+#											  #
+# Options:										  #
+# -h        	shows help file								  #
+# -v            shows vasp2xyz version							  #
+# -c		automatically complete cell (e.g. Si 8 atoms -> 18 atoms)		  #
+# -nos          no scaling with box dimension; default is false			          #
+# -n            special naming convention; POSCAR.name -> name.xyz			  #
+#											  #
+# Parameters:										  #
+# inputfile 	POSCAR/CONTCAR file to convert to xyz format				  #
+# xyzfile	output filename in xyz format; default is inputfile.xyz			  #
+# softbox  	assumes a smeared box edge to define inside and outside (complete cell)   #
+#		default is 0.03 of box size						  #
+#											  #
+# IMPORTANT: 										  #	
+# The first line in the POSCAR/CONTCAR file need to have the format 			  #
+#											  #
+# "name specy1 specy2 ..."								  #
+#											  #	
+# The specy list need to be consistent with line 6 (no. of species of each kind)	  #
+#											  #	
+# Example: 7 silicon, 1 arsenic atom, and 2 boron atoms 				  #
+# line1: Si7AsB2 As B Si								  #
+# line6:  1 2 7										  #
+#-----------------------------------------------------------------------------------------#

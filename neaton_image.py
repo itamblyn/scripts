@@ -1,4 +1,4 @@
-#!/global/software/centos-5.x86_64/modules/Python/2.6.5/bin/python
+#!/usr/bin/python
 
 #QP = -7.430 - -5.839# BDA, HOMO-1, 829 bands
 
@@ -10,9 +10,9 @@ QP = -1.433 # BDA, HOMO, 829 bands
 
 print 'REMEMBER TO SEE IF ITS IN DIRECT COORINDATES OR NOT'
 
-image_plane = 1.57 
+image_plane = 1.47 
 
-surface_z = 7.07772
+surface_z = 12.094969999999968
 
 import numpy
 

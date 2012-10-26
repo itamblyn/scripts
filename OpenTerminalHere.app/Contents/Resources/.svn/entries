@@ -1,0 +1,60 @@
+9
+
+dir
+404
+svn+ssh://www.entropy.ch/Users/liyanage/documents/svnroot/trunk/open-terminal-here/OpenTerminalHere.app/Contents/Resources
+svn+ssh://www.entropy.ch/Users/liyanage/documents/svnroot
+
+
+
+2008-08-06T17:41:06.034052Z
+370
+liyanage
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+153f8dbc-cef0-0310-8e0e-ba1d6c9f8c6b
+
+description.rtfd
+dir
+
+droplet.rsrc
+file
+
+
+
+
+2007-01-24T08:44:44.000000Z
+9b23c4f9c26884fd1b8e6bca99043082
+2007-01-24T09:21:47.873673Z
+278
+liyanage
+has-props
+
+droplet.icns
+file
+
+
+
+
+2007-01-24T08:44:45.000000Z
+8887609d74a27b08ae489ea99f1b8af0
+2006-04-24T10:46:12.692800Z
+208
+liyanage
+has-props
+
+Scripts
+dir
+

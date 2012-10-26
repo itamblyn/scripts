@@ -1,0 +1,41 @@
+9
+
+dir
+404
+svn+ssh://www.entropy.ch/Users/liyanage/documents/svnroot/trunk/open-terminal-here/OpenTerminalHere.app/Contents/MacOS
+svn+ssh://www.entropy.ch/Users/liyanage/documents/svnroot
+
+
+
+2006-04-24T10:46:12.692800Z
+208
+liyanage
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+153f8dbc-cef0-0310-8e0e-ba1d6c9f8c6b
+
+droplet
+file
+
+
+
+
+2007-01-24T08:44:44.000000Z
+eb36400916a49aedc99d28fbe776c287
+2006-04-24T10:46:12.692800Z
+208
+liyanage
+has-props
+

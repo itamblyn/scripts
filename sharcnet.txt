@@ -1,0 +1,9 @@
+goblin.sharcnet.ca	opteron	122
+narwhal.sharcnet.ca	opteron	1068
+dolphin.sharcnet.ca	opteron	128
+bala.sharcnet.ca	opteron	128
+bruce.sharcnet.ca	opteron	128
+megaladon.sharcnet.ca	opteron	128
+tiger.sharcnet.ca	opteron	128
+zebra.sharcnet.ca	opteron	128
+greatwhite.sharcnet.ca	alpha	456

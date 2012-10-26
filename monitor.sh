@@ -1,9 +1,9 @@
 #!/bin/tcsh
 
-foreach n (`wwnodes | awk '/itamblyn/{print $1}'`)
+foreach machine ( selenium tellurium beryllium carbon neon nitrogen fluorine oxygen )
 
-    echo -n $n " "
+  echo -n $machine " "
 
-    ssh ${n} top -b -n1 | awk '/load/{print $10, $11, $12, $13, $14}' 
+  ssh ${machine} top -b -n1 | awk '/load/{print $10, $11, $12, "(5 min)", $14, "(15 min)"}' | sed s/,//g 
 
 end

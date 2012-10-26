@@ -1,5 +1,3 @@
 #!/bin/bash
-#
-#rm planechg.* vasp.s.* CONTCAR planechg.dat model* machine* job.* LOCPOT CHGCAR CHG DOSCAR* PROCAR EIGENVAL IBZKPT OSZICAR OUTCAR PCDAT TMPCAR vasprun.xml WAVECAR XDATCAR* STOPCAR log *.dat 
-rm CHG  DOSCAR  EIGENVAL  IBZKPT  OSZICAR  OUTCAR  PCDAT   WAVECAR  XDATCAR  log  pressure.dat  std.oe 
-#rm pbda* planechg.* vasp.s.* CONTCAR planechg.dat model* machine* job.* LOCPOT CHGCAR CHG DOSCAR* PROCAR EIGENVAL IBZKPT OSZICAR OUTCAR PCDAT TMPCAR vasprun.xml XDATCAR* STOPCAR log *.dat 
+
+rm CHG* DOSCAR EIGENVAL IBZKPT OSZICAR OUTCAR PCDAT TMPCAR vasprun.xml WAVECAR XDATCAR* STOPCAR log *.dat *.xyz
