@@ -1,6 +1,4 @@
-#! /usr/bin/python
-
-# Template for Isaac
+#!/usr/bin/env python
 
 import os, sys
 

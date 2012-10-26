@@ -23,7 +23,7 @@ sub nint {
 }
 ###
 
-$atom_types = "C H O N S";
+$atom_types = "C O";
 print "WARNING!! check atom types: $atom_types\n";
 @atom = split " ", $atom_types;
 open (INF, "<$ARGV[0]") || die "Can't open input dump file\n";

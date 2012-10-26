@@ -1,40 +1,17 @@
 #!/usr/bin/perl
 
-###
-sub nint {
-  my $x = $_[0];
-  my $n = int($x);
-  if ( $x > 0 ) {
-    if ( $x-$n > 0.5) {
-      return $n+1;
-    }
-    else {
-      return $n;
-    }
-  }
-  else {
-    if ( $n-$x > 0.5) {
-      return $n-1;
-    }
-    else {
-      return $n;
-    }
-  }
-}
-###
-
-$atom_types = "C H O N S";
+$atom_types = "O H";
 print "WARNING!! check atom types: $atom_types\n";
-@atom = split " ", $atom_types;
 open (INF, "<$ARGV[0]") || die "Can't open input dump file\n";
-open (OUT, ">lmp_traj.xyz") || die "Can't open lmp_traj.gen\n";
+open (OUT, ">lmp_traj.gen") || die "Can't open lmp_traj.gen\n";
 while (<INF>) {
   $time_step = <INF>;
   chomp($time_step);
   $line = <INF>;
   $natom = <INF>;
   chomp($natom);
-  print (OUT "$natom\n");
+  print (OUT "  $natom S # time step $time_step\n");
+  print (OUT "$atom_types\n");
   $line = <INF>;
   # assumes orthorhombic box
   @line = split " ", <INF>;
@@ -43,7 +20,6 @@ while (<INF>) {
   $ly = $line[1] - $line[0];
   @line = split " ", <INF>;
   $lz = $line[1] - $line[0];
-  print (OUT "$lx $ly $lz # time step $time_step\n");
   @line = split " ", <INF>;
   for ($i = 0; $i < @line; $i++) {
     if ($line[$i] =~ /id/) {
@@ -60,11 +36,12 @@ while (<INF>) {
   }
   for ($i = 0; $i < $natom; $i++) {
     @line = split " ", <INF>;
-    $line[$x_ind] -= $lx*nint($line[$x_ind]/$lx);
-    $line[$y_ind] -= $ly*nint($line[$y_ind]/$ly);
-    $line[$z_ind] -= $lz*nint($line[$z_ind]/$lz);
-    print (OUT "$atom[$line[$type_ind]-1] $line[$x_ind] $line[$y_ind] $line[$z_ind]\n");
+    print (OUT "    $line[$id_ind] $line[$type_ind] $line[$x_ind] $line[$y_ind] $line[$z_ind]\n");
   }
+  print (OUT "    0.0000000000E+00    0.0000000000E+00    0.0000000000E+00\n");
+  print (OUT "    $lx    0.0000000000E+00    0.0000000000E+00\n");
+  print (OUT "    0.0000000000E+00    $ly    0.0000000000E+00\n");
+  print (OUT "    0.0000000000E+00    0.0000000000E+00    $lz\n");
 }
 close (INF);
 close (OUT);

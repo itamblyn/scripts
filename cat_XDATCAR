@@ -1,0 +1,21 @@
+#!/bin/tcsh
+
+rm -rf files 
+
+mkdir files
+
+set num=`ls -l POSCAR.10* | awk '{print $9}' | head -1 | sed s/"\."/" "/g | awk '{print $2}'`
+
+cp POSCAR."$num"  files/POSCAR
+cp ../POTCAR  files/POTCAR 
+cp CONTCAR."$num" files/CONTCAR
+
+head -5 XDATCAR."$num" > files/XDATCAR
+
+foreach file ( XDATCAR.* )
+
+tail -n +6 $file >> files/XDATCAR
+
+end
+
+cat vasprun.*.xml > files/vasprun.xml
