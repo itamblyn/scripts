@@ -1,0 +1,6 @@
+#!/bin/bash
+
+status | tail -n +6 | sed s/"\."/" "/g | awk '{printf " "$1" "}' > $HOME/.hold_list
+echo >> $HOME/.hold_list
+cat $HOME/.hold_list | xargs qdel 
+rm $HOME/.hold_list

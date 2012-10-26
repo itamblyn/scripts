@@ -1,0 +1,8 @@
+#!/bin/tcsh
+
+set jobid=$1
+
+qstat -f $jobid > ~/q.tmp
+grep -A 2 WORKDIR ~/q.tmp | grep -v MANPATH
+grep job_state ~/q.tmp
+rm ~/q.tmp

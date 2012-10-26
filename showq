@@ -1,0 +1,12 @@
+#!/bin/bash
+
+wwnodes | grep free | grep nano | grep -v debug
+
+echo    "_____________________________________________________________________"
+echo -n "                                                                          "
+
+#wwnodes | grep free | grep nano | grep -v debug | awk '{n+=$4 + $5; print n}' | tail -1
+wwnodes | grep free | grep nano | grep -v debug | awk '{n+=1; print n}' | tail -1
+echo
+
+qstat -u $USER | grep $USER

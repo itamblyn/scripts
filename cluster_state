@@ -1,0 +1,34 @@
+#!/bin/bash
+
+n2=`wwnodes | grep nano2 | egrep -v 'offline|down|debug|0\/|1\/|2\/|3\/|4\/|5\/|6\/|7\/' | wc -l`
+n4=`wwnodes | grep nano4 | egrep -v 'offline|down|debug|0\/|1\/|2\/|3\/|4\/|5\/|6\/|7\/' | wc -l`
+n8=`wwnodes | grep nano8 | egrep -v 'offline|down|debug|0\/|1\/|2\/|3\/|4\/|5\/|6\/|7\/' | wc -l`
+lawrencium=`wwnodes | grep lawrencium | egrep -v 'offline|down|debug|0\/|1\/|2\/|3\/|4\/|5\/|6\/|7\/' | wc -l`
+lawrencium2=`wwnodes | grep lr2 | egrep -v 'offline|down|debug|0\/|1\/|2\/|3\/|4\/|5\/|6\/|7\/' | wc -l`
+vulcan=`wwnodes | grep vulcan | egrep -v 'SHUTDOWN|READY|offline|down|debug|0\/|1\/|2\/|3\/|4\/|5\/|6\/|7\/' | wc -l`
+
+
+echo -n "nano2: "
+echo -n $n2
+echo " nodes available"
+
+echo -n "nano4: "
+echo -n $n4
+echo " nodes available"
+
+echo -n "nano8: "
+echo -n $n8
+echo " nodes available"
+
+echo -n "vulcan: "
+echo -n $vulcan
+echo " nodes available"
+
+echo -n "lawrencium: "
+echo -n $lawrencium
+echo " nodes available"
+
+echo -n "lawrencium2: "
+echo -n $lawrencium2
+echo " nodes available"
+

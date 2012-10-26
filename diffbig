@@ -1,0 +1,18 @@
+#!/bin/tcsh
+
+set file1=$1
+set file2=$2
+
+md5sum $file1 > .file1.out &
+md5sum $file2 > .file2.out &
+
+wait
+
+cat .file1.out .file2.out
+
+rm  .file1.out .file2.out
+
+
+
+
+
