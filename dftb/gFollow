@@ -1,0 +1,56 @@
+#!/bin/tcsh
+
+rm -f gnuplot.scr
+
+#rm -f tail.xyz
+#tail -258000 geo_CONTCAR.xyz > tail.xyz
+
+#RDF < RDF.tail.in > /dev/null #&
+#echo "RDF"
+
+#rm -f msd.in
+#echo "geo_CONTCAR.xyz" > msd.in
+#msd.x < msd.in > /dev/null &
+#echo "msd"
+rm -f pressure.dat
+grep -a Pa output.log | grep -v Pars | grep -v Path | awk '{n+=1; print n, $4/1e9}' > pressure.dat &
+rm -f volume.dat
+grep Volume output.log | awk '{n+=1; print n, $2}' > volume.dat &
+grep Temperature output.log | awk '{n+=1; print n, $5}' > temperature.dat
+
+
+wait
+
+set cmd="gnuplot.scr"
+cat > $cmd << END
+#set style data linespoints
+#set xlabel "Distance [AA]"
+#set yrange [0:*]
+#set ylabel "g(r)"
+#plot "RDF.dat" u 1:2 
+#pause -1 "Showing RDF.\nPress enter to quit"
+
+#set ylabel "msd"
+#set xlabel "Timestep [ps]"
+#plot "msd.dat" u (\$1*0.000774016):2 every 10 
+#pause -1 "Showing MSD.\nPress enter to quit"
+
+set ylabel "pressure [GPa]"
+set yrange [*:*]
+set y2range [*:*]
+plot "pressure.dat" u (\$1*0.000774016):(\$2) every 10, "volume.dat" u (\$1*0.000774016):(\$2/1E5) every 10 axes x1y2 
+pause -1 "Showing pressure.\nPress enter to quit"
+
+set ylabel "temperature [K]"
+set yrange [0:*]
+plot "temperature.dat" u (\$1*0.000774016):(\$2) every 10
+pause -1 "Showing temperature.\nPress enter to quit"
+
+quit
+END
+
+gnuplot $cmd
+
+\rm $cmd
+
+rm -f msd.dat

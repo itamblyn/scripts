@@ -1,0 +1,21 @@
+Metadata-Version: 1.0
+Name: dptools
+Version: 0.1p2
+Summary: Tools to process DFTB+ related data
+Home-page: http://www.dftb-plus.info
+Author: B. Aradi, B. Hourahine, A. Pecchia
+Author-email: UNKNOWN
+License: UNKNOWN
+Description: 
+        Processing and converting data related to the DFTB+ package
+        -----------------------------------------------------------
+        A few scripts which should make the life of DFTB+ users easier, by providing
+        functions to process and convert various DFTB+ data formats.
+        
+Platform: platform independent
+Classifier: Programming Language :: Python
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Scientific/Engineering

@@ -1,2 +1,2 @@
-scripts
+scritps
 =======

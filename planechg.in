@@ -1,0 +1,9 @@
+LOCPOT
+3			! perpendicular to 1-x, 2-y, 3-z
+1			! scale by 1/vol or not, 1-yes, other-no
+0.0  			! shift the data
+1  			! ns, # of spins
+0  			! lcutoff, provide a cutoff: 1-yes,other-no
+
+0  			! calculate the average along z: 0-no, in angstrom
+0
