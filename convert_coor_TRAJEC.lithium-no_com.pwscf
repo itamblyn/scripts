@@ -1,0 +1,8 @@
+#!/bin/csh
+
+set acell=`grep celldm lithium.pw.inp | awk '{print $3}' | sed s/,//g`
+set natoms=`grep nat lithium.pw.inp | tail -1 | awk '{print $3}' | sed s/,//g`
+
+touch output/fake.out
+
+grep -A $natoms ATOMIC_POSITIONS output/*.out | awk '/Li/{print $2," ",$3," ",$4}' | sed s/"\-"/" \-"/g | awk -f ~/scripts/utils/convert_coor_TRAJEC.awk acell=$acell natoms=$natoms > TRAJEC.xyz

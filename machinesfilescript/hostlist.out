@@ -1,0 +1,33 @@
+Warning: no access to tty; thus no job control in this shell...
+Sun Microsystems Inc.	SunOS 5.10	Generic	January 2005
+Thu Aug  9 20:49:27 NDT 2007
+PE_HOSTFILE is /var/spool/sge/cl012/active_jobs/88217.1/pe_hostfile and contains:
+-----------------------------
+cl012 16 all.q@cl012 <NULL>
+-----------------------------
+HOSTNAME is cl012
+NHOSTS is 1
+NSLOTS is 16
+TMPDIR is /tmp/88217.1.all.q
+JOB_ID is 88217
+SGE_O_WORKDIR is /home/itamblyn/machinesfilescript
+/tmp/88217.1.all.q/machines contains:
+-----------------------------
+cl012
+cl012
+cl012
+cl012
+cl012
+cl012
+cl012
+cl012
+cl012
+cl012
+cl012
+cl012
+cl012
+cl012
+cl012
+cl012
+-----------------------------
+logout

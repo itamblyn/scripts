@@ -1,9 +1,8 @@
 #!/bin/tcsh
 
-foreach machine ( selenium tellurium beryllium carbon neon nitrogen fluorine oxygen )
+foreach machine (cl001 cl002 cl003 cl004 cl005 cl006)
 
-  echo -n $machine " "
-
-  ssh ${machine} top -b -n1 | awk '/load/{print $10, $11, $12, "(5 min)", $14, "(15 min)"}' | sed s/,//g 
+  echo $machine
+  ssh $machine /usr/local/bin/qclean-mx.sh
 
 end
