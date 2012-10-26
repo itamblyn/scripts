@@ -1,0 +1,10 @@
+#!/bin/bash
+
+qstat -u \* -f  | awk '/cl00/{print $0} /cl010/{print $0} /cl011/{print $0} /cl012/{print $0}' | awk '/short/{print $1, $3, $4}' > out.tmp
+cat out.tmp
+echo
+echo -n "Total slots in use: "
+sed s/@/" "/g out.tmp | sed s/"\/"/" "/g | awk '{nslots+=$3; print nslots}' | tail -1
+echo -n "Open slots: "
+sed s/@/" "/g out.tmp | sed s/"\/"/" "/g | awk '{nslots+=$3; print 192 - nslots}' | tail -1
+rm out.tmp

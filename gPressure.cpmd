@@ -1,0 +1,39 @@
+#!/bin/tcsh
+
+set timeStep = $1
+
+awk '/STRESS/{n+=1;a=0;getline;a=$1/10;getline;a+=$2/10;getline;a+=$3/10;print n "   "  a/3}'  STRESS > outPressure_GPa
+
+ln -s outPressure_GPa outPressure_GPa.250
+ln -s outPressure_GPa outPressure_GPa.500
+ln -s outPressure_GPa outPressure_GPa.1000
+
+~/scripts/utils/running-average.py outPressure_GPa.250 2 250 &
+~/scripts/utils/running-average.py outPressure_GPa.500 2 500 &
+~/scripts/utils/running-average.py outPressure_GPa.1000 2 1000 &
+
+wait
+
+set cmd="gnuplot.scr"
+cat > $cmd << END
+set data style linespoints
+set xlabel "Time (ps)"
+set ylabel "Pressure (GPa)"
+set yrange [*:*]
+set terminal png
+set output 'pressure.png'
+#plot "outPressure_GPa" u (\$1*$timeStep*2.4188E-17/1.0E-12):2 t "pressure (GPa)" with linespoints, "outPressure_GPa.250.running" u (\$1*$timeStep*2.4188E-17/1.0E-12):2 t "running pressure (GPa), 250 steps", "outPressure_GPa.500.running" u (\$1*$timeStep*2.4188E-17/1.0E-12):2 t "running pressure (GPa), 500 steps", "outPressure_GPa.1000.running" u (\$1*$timeStep*2.4188E-17/1.0E-12):2 t "running pressure (GPa), 1000 steps"
+set terminal x11
+#plot "outPressure_GPa" u (\$1*$timeStep*2.4188E-17/1.0E-12):2 t "pressure (GPa)" with linespoints, "outPressure_GPa.250.running" u (\$1*$timeStep*2.4188E-17/1.0E-12):2 t "running pressure (GPa), 250 steps", "outPressure_GPa.500.running" u (\$1*$timeStep*2.4188E-17/1.0E-12):2 t "running pressure (GPa), 500 steps", "outPressure_GPa.1000.running" u (\$1*$timeStep*2.4188E-17/1.0E-12):2 t "running pressure (GPa), 1000 steps"
+plot "outPressure_GPa" u (\$1*$timeStep*2.4188E-17/1.0E-12):2 t "pressure (GPa)" with linespoints, "outPressure_GPa.250.running" u (\$1*$timeStep*2.4188E-17/1.0E-12):2 t "running pressure (GPa), 250 steps"
+pause -1 "Showing pressure.\nPress enter to quit"
+quit
+END
+
+gnuplot $cmd
+
+\rm $cmd
+
+~/bin/blocker outPressure_GPa 2 | grep Final
+
+rm outPressure_GPa.*

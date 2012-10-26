@@ -1,0 +1,21 @@
+number_of_particles = int(xyzFile.readline())
+
+atom_mass_list = {'H': 1.0, 'He': 4.0, 'Li' : 7.0, 'K' : 39.09830}
+
+CELL_array = []
+POSITION_array = []
+
+for line in xyzFile:
+    if len(line.split()) == 4:
+
+         POSITION_array.append([])
+         atom_mass = atom_mass_list[line.split()[0]]
+         POSITION_array[-1].append(atom_mass)
+         position_vector = [float(line.split()[1])/(0.529177), float(line.split()[2])/(0.529177),float(line.split()[3])/(0.529177)]
+         POSITION_array[-1].append(position_vector)
+
+    elif len(line.split()) == 3:
+         CELL_array.append([])
+         for i in line.split():
+             CELL_array[-1].append(float(i)/(0.529177*scale))
+xyzFile.close()

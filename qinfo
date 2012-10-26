@@ -1,8 +1,4 @@
-#!/bin/tcsh
+#!/bin/bash
 
-set jobid=$1
-
-qstat -f $jobid > ~/q.tmp
-grep -A 2 WORKDIR ~/q.tmp | grep -v MANPATH
-grep job_state ~/q.tmp
-rm ~/q.tmp
+export directory=`qstat -j $1 | grep sge_o_workdir | awk '{print $2}'`
+echo $directory

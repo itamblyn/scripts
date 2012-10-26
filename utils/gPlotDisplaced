@@ -1,0 +1,30 @@
+#!/bin/csh
+#-------------------------------------------------------------------------------
+# plot the average displacement as a function of time
+# I. Tamblyn                                                C.I.W. 06-09-05
+#
+# based on a script by:
+# B. Militzer                                               Livermore 04-23-01
+#-------------------------------------------------------------------------------
+set file=$1
+set timeStep=$2
+
+if (!(-e $1)) then
+   echo "Could not find file '" $1 "'"
+   exit(-1)
+endif
+
+set cmd="gnuplot.scr"
+cat > $cmd << END
+set yrange [0:100]
+set xlabel "time (ps)"
+set ylabel "percentage displacement"
+plot "$file" u (\$1*$2*2.4188E-17/1.0E-12):(\$4*100) t "% displacement"
+pause -1 "Showing % of displaced particles.\nPress enter to quit"
+quit
+END
+
+
+gnuplot $cmd
+
+\rm $cmd
