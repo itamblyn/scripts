@@ -23,7 +23,7 @@ sub nint {
 }
 ###
 
-$atom_types = "C";
+$atom_types = "C H O N S";
 print "WARNING!! check atom types: $atom_types\n";
 @atom = split " ", $atom_types;
 open (INF, "<$ARGV[0]") || die "Can't open input dump file\n";
@@ -43,7 +43,7 @@ while (<INF>) {
   $ly = $line[1] - $line[0];
   @line = split " ", <INF>;
   $lz = $line[1] - $line[0];
-  print (OUT "BOX: $lx $ly $lz # time step $time_step\n");
+  print (OUT "$lx $ly $lz # time step $time_step\n");
   @line = split " ", <INF>;
   for ($i = 0; $i < @line; $i++) {
     if ($line[$i] =~ /id/) {
