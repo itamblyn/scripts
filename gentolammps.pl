@@ -54,8 +54,6 @@ for ($i = 1; $i <= $ntypes; $i++) {
     $mass = 15.9990;
   } elsif ($types[$i-1] eq "N") {
     $mass = 14.0000;
-  } elsif ($types[$i-1] eq "S") {
-    $mass = 32.065;
   } elsif ($types[$i-1] eq "Al") {
     $mass = 27.0000;
   } elsif ($types[$i-1] =~ /Si/) {
