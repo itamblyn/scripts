@@ -62,7 +62,7 @@ def read_paratec_eigenvalues(subtractFermi):
     wkpt_array = numpy.zeros(nkpt, dtype=float)
     eigenvalue_list = []
 
-    neigen_per_kpt= int(commands.getoutput('grep "OCC. SPACE SIZE" OUT | head -1 ').split()[3])
+    neigen_per_kpt= int(commands.getoutput('grep "m\=" OUT | head -1 ').split()[3])
     print 'neigen_per_kpt =', neigen_per_kpt
 
     for i in range(nkpt):
