@@ -52,6 +52,9 @@ def read_vasp_eigenvalues(subtractFermi):
     return eigenvalue_list, wkpt_array, nkpt, neigen_per_kpt
 
 def read_paratec_eigenvalues(subtractFermi):
+
+    efermi = float(commands.getoutput('awk \'/Fermi/{print $7}\' OUT | tail -1'))
+    print 'efermi = ', efermi 
     inputFile = open('SCF_KPOINTS')
 
     nkpt = int(inputFile.readline().split()[0])  
@@ -59,8 +62,8 @@ def read_paratec_eigenvalues(subtractFermi):
     wkpt_array = numpy.zeros(nkpt, dtype=float)
     eigenvalue_list = []
 
-    neigen_per_kpt= 1796
-    print 'hard coded neigen_per_kpt =', neigen_per_kpt
+    neigen_per_kpt= int(commands.getoutput('grep "OCC. SPACE SIZE" OUT | head -1 ').split()[3])
+    print 'neigen_per_kpt =', neigen_per_kpt
 
     for i in range(nkpt):
         wkpt_array[i] = float(inputFile.readline().split()[4])
@@ -85,20 +88,29 @@ def read_paratec_eigenvalues(subtractFermi):
         eig_array = []
         for ineigen_per_kpt in range(neigen_per_kpt):
             eig_array.append(tmp_array[counter])
-
             counter +=1
 
         eig_array.sort()
         eigenvalue_list = eig_array + eigenvalue_list
+
+
+    eigenvalue_list = numpy.array(eigenvalue_list)
+    if subtractFermi == True: eigenvalue_list -= efermi
 
     return eigenvalue_list, wkpt_array, nkpt, neigen_per_kpt
 
 def main():
 
     subtractFermi = True
-
-    eigenvalue_list, wkpt_array, nkpt, neigen_per_kpt = read_paratec_eigenvalues(subtractFermi) 
-
+    detect_paratec = int(commands.getoutput('grep paratecSGL OUT | wc -l '))
+    
+    if detect_paratec == 1:
+        print 'Detected paratec'
+        eigenvalue_list, wkpt_array, nkpt, neigen_per_kpt = read_paratec_eigenvalues(subtractFermi) 
+    else:
+        print 'Detected vasp'
+        eigenvalue_list, wkpt_array, nkpt, neigen_per_kpt = read_vasp_eigenvalues(subtractFermi) 
+  
     print len(eigenvalue_list), ' eigenvalues were read'
 
 #    g = Gnuplot.Gnuplot()
