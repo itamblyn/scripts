@@ -110,6 +110,8 @@ def main():
     else:
         print 'Detected vasp'
         eigenvalue_list, wkpt_array, nkpt, neigen_per_kpt = read_vasp_eigenvalues(subtractFermi) 
+ 
+    command = commands.getoutput('rm -f grepfile')
   
     print len(eigenvalue_list), ' eigenvalues were read'
 
