@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-import numpy
+import numpy, commands
 
-def read_eigenvalues(subtractFermi):
+def read_vasp_eigenvalues(subtractFermi):
 
     inputFile_EIGENVAL = open('EIGENVAL', 'r')
     inputFile_IBZKPT = open('IBZKPT', 'r')
@@ -15,7 +15,6 @@ def read_eigenvalues(subtractFermi):
         inputFile_IBZKPT.readline()
 
     efermi = float(inputFile_DOSCAR.readline().split()[3])
-
 
     line = inputFile_EIGENVAL.readline()
 
@@ -35,9 +34,7 @@ def read_eigenvalues(subtractFermi):
     for i in range(nkpt):
 
         eigenvalue_array.append([])
-
         inputFile_EIGENVAL.readline()   # skips line before data
-
         wkpt = float(inputFile_EIGENVAL.readline().split()[3])
         wkpt_array[i] = wkpt
 
@@ -49,20 +46,73 @@ def read_eigenvalues(subtractFermi):
     eigenvalue_list = []
 
     for i in range(nkpt):
-
         for eigenvalue in eigenvalue_array[i]:
-
             eigenvalue_list.append(eigenvalue)
 
+    return eigenvalue_list, wkpt_array, nkpt, neigen_per_kpt
+
+def read_paratec_eigenvalues(subtractFermi):
+
+    efermi = float(commands.getoutput('awk \'/Fermi/{print $7}\' OUT | tail -1'))
+    print 'efermi = ', efermi 
+    inputFile = open('SCF_KPOINTS')
+
+    nkpt = int(inputFile.readline().split()[0])  
+    
+    wkpt_array = numpy.zeros(nkpt, dtype=float)
+    eigenvalue_list = []
+
+    neigen_per_kpt= int(commands.getoutput('grep "m\=" OUT | head -1 ').split()[3])
+    print 'neigen_per_kpt =', neigen_per_kpt
+
+    for i in range(nkpt):
+        wkpt_array[i] = float(inputFile.readline().split()[4])
+ 
+    inputFile.close()
+    grep_lines = neigen_per_kpt*2/7 + 1 # two lines per, 7 columns, and one line which says kpoint
+    
+    command_line_counter = commands.getoutput('grep -A ' + str(grep_lines) + ' k-point OUT | tac | grep "\." | grep -v "(" > grepfile')
+
+    inputFile = open('grepfile')
+
+    # read in ALL eigenvalues (it will be easier this way)
+
+    tmp_array = []
+
+    for line in inputFile.readlines():
+        for element in line.split():
+            tmp_array.append(float(element))
+
+    counter = 0
+    for inkpt in range(nkpt):
+        eig_array = []
+        for ineigen_per_kpt in range(neigen_per_kpt):
+            eig_array.append(tmp_array[counter])
+            counter +=1
+
+        eig_array.sort()
+        eigenvalue_list = eig_array + eigenvalue_list
+
+
+    eigenvalue_list = numpy.array(eigenvalue_list)
+    if subtractFermi == True: eigenvalue_list -= efermi
 
     return eigenvalue_list, wkpt_array, nkpt, neigen_per_kpt
 
 def main():
 
     subtractFermi = True
-
-    eigenvalue_list, wkpt_array, nkpt, neigen_per_kpt = read_eigenvalues(subtractFermi) 
-
+    detect_paratec = int(commands.getoutput('grep paratecSGL OUT | wc -l '))
+    
+    if detect_paratec == 1:
+        print 'Detected paratec'
+        eigenvalue_list, wkpt_array, nkpt, neigen_per_kpt = read_paratec_eigenvalues(subtractFermi) 
+    else:
+        print 'Detected vasp'
+        eigenvalue_list, wkpt_array, nkpt, neigen_per_kpt = read_vasp_eigenvalues(subtractFermi) 
+ 
+    command = commands.getoutput('rm -f grepfile')
+  
     print len(eigenvalue_list), ' eigenvalues were read'
 
 #    g = Gnuplot.Gnuplot()
