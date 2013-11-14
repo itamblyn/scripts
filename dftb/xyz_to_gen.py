@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/bin/env python2.7
 
 import numpy
 import sys
@@ -10,8 +10,7 @@ outputFile = open('input.gen','w')
 
 natom = int(inputFile.readline().split()[0])
 
-#atom_name = {'C':0, 'H':1, 'O':2, 'N':3}
-atom_name = {'O':0}
+atom_name = {'C':0, 'O':1, 'H':2}
 atom_array = []
 
 for i in range(len(atom_name)):

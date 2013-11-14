@@ -1,15 +1,15 @@
-#!/global/software/centos-5.x86_64/modules/Python/2.7.1/bin/python
-
+#!/usr/bin/env python
 import sys
 import numpy
 
 QP = -3.1  
 
-image_plane = 1.47
-#image_plane = 1.
+#image_plane = 1.47
+#image_plane = 
+image_plane = .75
 
 surface_z = 0.0
-carbon_z = surface_z + 3.7
+carbon_z = surface_z + 3.5 # flat111
 
 #carbon_z = surface_z + 5.4
 

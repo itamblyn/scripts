@@ -12,8 +12,9 @@ pi = math.pi
 
 # inputs
 
-length = input('Lattice parameter? ')
-N = input('Number of electrons? ')
+length = input('Lattice parameter [Angst]? ')
+length/= .529177
+N = input('Number of particles? ')
 
 
 Rs = (length)*(3/(4*N*pi))**(1.0/3.0)
