@@ -1,4 +1,6 @@
-#!/usr/bin/env python
+#! /usr/bin/python
+
+# Template for Isaac
 
 import os, sys
 
@@ -33,7 +35,7 @@ def main():
         # Attempt to retrieve required input from user
         prog = sys.argv[0]
         a = float(sys.argv[1])
-        b = float(sys.argv[2])
+        b = float(sys.argv[1])
     except IndexError:
         # Tell the user what they need to give
         print '\nusage: '+prog+' a b    (where a & b are numbers)\n'
