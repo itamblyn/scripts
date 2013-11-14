@@ -1,4 +1,6 @@
 #!/usr/bin/env python2.7
+# this is a bit of a hack code to make gen files from a single xyz 
+
 
 import numpy
 import sys
@@ -37,7 +39,6 @@ outputFile.write('\n')
 for i in range(len(atom_name)):
 
     for triple in atom_array[i]:
-#        print atom_name.keys()[i]
         outputFile.write(str(atom_counter) + ' ' + str(type_counter) + ' ' + str(float(triple[0])) \
         + ' ' + str(float(triple[1])) + ' ' + str(float(triple[2])) + '\n')
         atom_counter += 1
