@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+<<<<<<< HEAD
+=======
+
+# Template for Isaac
+>>>>>>> 26723bb9b43ae9671fb3fdacd4c5c1eb367a3cb3
 
 import os, sys
 
