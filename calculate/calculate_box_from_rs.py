@@ -4,7 +4,8 @@ import math
 
 # constants
 
-a0 = 5.291772108E-09  # Bohr radius in cm
+a0 = 5.291772106712E-09 # Bohr radius in cm
+
 pi = math.pi
 
 
